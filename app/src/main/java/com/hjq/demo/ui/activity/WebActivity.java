@@ -17,7 +17,7 @@ import com.hjq.baselibrary.utils.WebViewLifecycleUtils;
 import com.hjq.demo.R;
 import com.hjq.demo.common.CommonActivity;
 
-import butterknife.BindView;
+import org.xutils.view.annotation.ViewInject;
 
 /**
  *    author : HJQ
@@ -27,9 +27,9 @@ import butterknife.BindView;
  */
 public class WebActivity extends CommonActivity {
 
-    @BindView(R.id.pb_web_progress)
+    @ViewInject(R.id.pb_web_progress)
     ProgressBar mProgressBar;
-    @BindView(R.id.wv_web_view)
+    @ViewInject(R.id.wv_web_view)
     WebView mWebView;
 
     @Override

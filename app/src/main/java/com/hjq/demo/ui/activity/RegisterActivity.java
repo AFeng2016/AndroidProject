@@ -10,7 +10,7 @@ import com.hjq.demo.R;
 import com.hjq.demo.common.CommonActivity;
 import com.hjq.toast.ToastUtils;
 
-import butterknife.BindView;
+import org.xutils.view.annotation.ViewInject;
 
 /**
  *    author : HJQ
@@ -21,20 +21,20 @@ import butterknife.BindView;
 public class RegisterActivity extends CommonActivity
         implements View.OnClickListener {
 
-    @BindView(R.id.et_register_phone)
+    @ViewInject(R.id.et_register_phone)
     EditText mPhoneView;
-    @BindView(R.id.cv_register_countdown)
+    @ViewInject(R.id.cv_register_countdown)
     CountdownView mCountdownView;
 
-    @BindView(R.id.et_register_code)
+    @ViewInject(R.id.et_register_code)
     EditText mCodeView;
 
-    @BindView(R.id.et_register_password1)
+    @ViewInject(R.id.et_register_password1)
     EditText mPasswordView1;
-    @BindView(R.id.et_register_password2)
+    @ViewInject(R.id.et_register_password2)
     EditText mPasswordView2;
 
-    @BindView(R.id.btn_register_commit)
+    @ViewInject(R.id.btn_register_commit)
     Button mCommitView;
 
     private EditTextInputHelper mEditTextInputHelper;

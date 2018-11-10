@@ -7,7 +7,7 @@ import com.hjq.demo.R;
 import com.hjq.demo.common.CommonLazyFragment;
 import com.hjq.toast.ToastUtils;
 
-import butterknife.BindView;
+import org.xutils.view.annotation.ViewInject;
 
 /**
  *    author : HJQ
@@ -18,7 +18,7 @@ import butterknife.BindView;
 public class TestFragmentB extends CommonLazyFragment
         implements View.OnClickListener {
 
-    @BindView(R.id.cv_test_countdown)
+    @ViewInject(R.id.cv_test_countdown)
     CountdownView mCountdownView;
 
     public static TestFragmentB newInstance() {

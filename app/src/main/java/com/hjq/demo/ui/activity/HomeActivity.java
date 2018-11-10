@@ -12,21 +12,22 @@ import com.hjq.demo.common.CommonActivity;
 import com.hjq.demo.ui.adapter.HomeViewPagerAdapter;
 import com.hjq.toast.ToastUtils;
 
-import butterknife.BindView;
+import org.xutils.view.annotation.ViewInject;
+
 
 /**
- *    author : HJQ
- *    github : https://github.com/getActivity/AndroidProject
- *    time   : 2018/10/18
- *    desc   : 主页界面
+ * author : HJQ
+ * github : https://github.com/getActivity/AndroidProject
+ * time   : 2018/10/18
+ * desc   : 主页界面
  */
 public class HomeActivity extends CommonActivity implements
         ViewPager.OnPageChangeListener, Runnable,
         BottomNavigationView.OnNavigationItemSelectedListener {
 
-    @BindView(R.id.vp_home_pager)
+    @ViewInject(R.id.vp_home_pager)
     ViewPager mViewPager;
-    @BindView(R.id.bv_home_navigation)
+    @ViewInject(R.id.bv_home_navigation)
     BottomNavigationView mBottomNavigationView;
 
     private HomeViewPagerAdapter mAdapter;
@@ -84,7 +85,8 @@ public class HomeActivity extends CommonActivity implements
      */
 
     @Override
-    public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {}
+    public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+    }
 
     @Override
     public void onPageSelected(int position) {
@@ -105,7 +107,8 @@ public class HomeActivity extends CommonActivity implements
     }
 
     @Override
-    public void onPageScrollStateChanged(int state) {}
+    public void onPageScrollStateChanged(int state) {
+    }
 
     /**
      * {@link BottomNavigationView.OnNavigationItemSelectedListener}

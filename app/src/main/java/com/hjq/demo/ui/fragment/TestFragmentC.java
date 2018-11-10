@@ -13,7 +13,7 @@ import com.hjq.toast.ToastUtils;
 
 import java.util.List;
 
-import butterknife.BindView;
+import org.xutils.view.annotation.ViewInject;
 
 /**
  *    author : HJQ
@@ -24,17 +24,17 @@ import butterknife.BindView;
 public class TestFragmentC extends CommonLazyFragment
         implements View.OnClickListener {
 
-    @BindView(R.id.btn_test_toast)
+    @ViewInject(R.id.btn_test_toast)
     Button mToastView;
-    @BindView(R.id.btn_test_permission)
+    @ViewInject(R.id.btn_test_permission)
     Button mPermissionView;
-    @BindView(R.id.btn_test_state_black)
+    @ViewInject(R.id.btn_test_state_black)
     Button mStateBlackView;
-    @BindView(R.id.btn_test_state_white)
+    @ViewInject(R.id.btn_test_state_white)
     Button mStateWhiteView;
-    @BindView(R.id.btn_test_swipe_enabled)
+    @ViewInject(R.id.btn_test_swipe_enabled)
     Button mSwipeEnabledView;
-    @BindView(R.id.btn_test_swipe_disable)
+    @ViewInject(R.id.btn_test_swipe_disable)
     Button mSwipeDisableView;
 
     public static TestFragmentC newInstance() {

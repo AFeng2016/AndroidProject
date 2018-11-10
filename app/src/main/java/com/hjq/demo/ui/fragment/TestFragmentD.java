@@ -10,7 +10,7 @@ import com.hjq.demo.ui.activity.LoginActivity;
 import com.hjq.demo.ui.activity.RegisterActivity;
 import com.hjq.demo.ui.activity.WebActivity;
 
-import butterknife.BindView;
+import org.xutils.view.annotation.ViewInject;
 
 /**
  *    author : HJQ
@@ -21,13 +21,13 @@ import butterknife.BindView;
 public class TestFragmentD extends CommonLazyFragment
         implements View.OnClickListener {
 
-    @BindView(R.id.btn_test_login)
+    @ViewInject(R.id.btn_test_login)
     Button mLoginView;
-    @BindView(R.id.btn_test_register)
+    @ViewInject(R.id.btn_test_register)
     Button mRegisterView;
-    @BindView(R.id.btn_test_about)
+    @ViewInject(R.id.btn_test_about)
     Button mAboutView;
-    @BindView(R.id.btn_test_browser)
+    @ViewInject(R.id.btn_test_browser)
     Button mBrowserView;
 
     public static TestFragmentD newInstance() {

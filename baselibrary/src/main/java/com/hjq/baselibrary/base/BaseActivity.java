@@ -8,10 +8,10 @@ import android.support.v7.app.AppCompatActivity;
 import com.hjq.baselibrary.utils.KeyboardUtils;
 
 /**
- *    author : HJQ
- *    github : https://github.com/getActivity/AndroidProject
- *    time   : 2018/10/18
- *    desc   : Activity基类
+ * author : HJQ
+ * github : https://github.com/getActivity/AndroidProject
+ * time   : 2018/10/18
+ * desc   : Activity基类
  */
 public abstract class BaseActivity extends AppCompatActivity {
 
@@ -26,7 +26,7 @@ public abstract class BaseActivity extends AppCompatActivity {
         init();
     }
 
-    public void init(){
+    public void init() {
         initView();
         initData();
     }
@@ -53,7 +53,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     /**
      * 跳转到其他Activity
      *
-     * @param cls       目标Activity的Class
+     * @param cls 目标Activity的Class
      */
     public void startActivity(Class<? extends Activity> cls) {
         startActivity(new Intent(this, cls));
@@ -62,7 +62,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     /**
      * 延迟执行某个任务
      *
-     * @param action          Runnable对象
+     * @param action Runnable对象
      */
     public boolean post(Runnable action) {
         return getWindow().getDecorView().post(action);
@@ -71,8 +71,8 @@ public abstract class BaseActivity extends AppCompatActivity {
     /**
      * 延迟某个时间执行某个任务
      *
-     * @param action        Runnable对象
-     * @param delayMillis   延迟的时间
+     * @param action      Runnable对象
+     * @param delayMillis 延迟的时间
      */
     public boolean postDelayed(Runnable action, long delayMillis) {
         return getWindow().getDecorView().postDelayed(action, delayMillis);
@@ -80,12 +80,13 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     /**
      * 删除某个延迟任务
-     * @param action        Runnable对象
+     *
+     * @param action Runnable对象
      */
     public boolean removeCallbacks(Runnable action) {
-        if(getWindow().getDecorView() != null) {
+        if (getWindow().getDecorView() != null) {
             return getWindow().getDecorView().removeCallbacks(action);
-        }else {
+        } else {
             return true;
         }
     }

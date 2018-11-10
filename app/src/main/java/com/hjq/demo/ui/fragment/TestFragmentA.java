@@ -10,29 +10,29 @@ import com.hjq.demo.R;
 import com.hjq.demo.common.CommonLazyFragment;
 import com.hjq.demo.widget.XCollapsingToolbarLayout;
 
-import butterknife.BindView;
+import org.xutils.view.annotation.ViewInject;
 
 /**
- *    author : HJQ
- *    github : https://github.com/getActivity/AndroidProject
- *    time   : 2018/10/18
- *    desc   : 项目炫酷效果示例
+ * author : HJQ
+ * github : https://github.com/getActivity/AndroidProject
+ * time   : 2018/10/18
+ * desc   : 项目炫酷效果示例
  */
 public class TestFragmentA extends CommonLazyFragment
         implements XCollapsingToolbarLayout.OnScrimsListener {
 
-    @BindView(R.id.abl_test_bar)
+    @ViewInject(R.id.abl_test_bar)
     AppBarLayout mAppBarLayout;
-    @BindView(R.id.ctl_test_bar)
+    @ViewInject(R.id.ctl_test_bar)
     XCollapsingToolbarLayout mCollapsingToolbarLayout;
-    @BindView(R.id.t_test_title)
+    @ViewInject(R.id.t_test_title)
     Toolbar mToolbar;
-    @BindView(R.id.tb_test_bar)
+    @ViewInject(R.id.tb_test_bar)
     TitleBar mTitleBar;
 
-    @BindView(R.id.tv_test_address)
+    @ViewInject(R.id.tv_test_address)
     TextView mAddressView;
-    @BindView(R.id.tv_test_search)
+    @ViewInject(R.id.tv_test_search)
     TextView mSearchView;
 
     public static TestFragmentA newInstance() {
@@ -84,7 +84,7 @@ public class TestFragmentA extends CommonLazyFragment
             mAddressView.setTextColor(getResources().getColor(R.color.black));
             mSearchView.setBackgroundResource(R.drawable.bg_home_search_bar_gray);
             getStatusBarConfig().statusBarDarkFont(true).init();
-        }else {
+        } else {
             mAddressView.setTextColor(getResources().getColor(R.color.white));
             mSearchView.setBackgroundResource(R.drawable.bg_home_search_bar_transparent);
             getStatusBarConfig().statusBarDarkFont(false).init();

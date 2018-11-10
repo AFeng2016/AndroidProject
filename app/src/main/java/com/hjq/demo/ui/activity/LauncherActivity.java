@@ -1,5 +1,6 @@
 package com.hjq.demo.ui.activity;
 
+import android.os.Build;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.view.animation.RotateAnimation;
@@ -17,22 +18,22 @@ import com.hjq.toast.ToastUtils;
 
 import java.util.List;
 
-import butterknife.BindView;
+import org.xutils.view.annotation.ViewInject;
 
 /**
- *    author : HJQ
- *    github : https://github.com/getActivity/AndroidProject
- *    time   : 2018/10/18
- *    desc   : 启动界面
+ * author : HJQ
+ * github : https://github.com/getActivity/AndroidProject
+ * time   : 2018/10/18
+ * desc   : 启动界面
  */
 public class LauncherActivity extends CommonActivity
         implements OnPermission, Animation.AnimationListener {
 
-    @BindView(R.id.iv_launcher_bg)
+    @ViewInject(R.id.iv_launcher_bg)
     ImageView mImageView;
-    @BindView(R.id.iv_launcher_icon)
+    @ViewInject(R.id.iv_launcher_icon)
     ImageView mIconView;
-    @BindView(R.id.iv_launcher_name)
+    @ViewInject(R.id.iv_launcher_name)
     TextView mTextView;
 
     @Override
@@ -58,7 +59,11 @@ public class LauncherActivity extends CommonActivity
     }
 
     @Override
-    protected void initData() {}
+    protected void initData() {
+
+        startActivity(HomeActivity.class);
+        finish();
+    }
 
     private static final int ANIM_TIME = 1000;
 
@@ -81,10 +86,15 @@ public class LauncherActivity extends CommonActivity
         mTextView.startAnimation(ra);
     }
 
+    //自动申请权限
     private void requestFilePermission() {
-        XXPermissions.with(this)
-                .permission(Permission.Group.STORAGE)
-                .request(this);
+        //必须设置 targetSdkVersion >= 23 才能正常检测权限
+        if (getApplicationInfo().targetSdkVersion >= Build.VERSION_CODES.M) {
+            XXPermissions.with(this)
+                    .permission(Permission.Group.STORAGE)
+                    .request(this);
+        }
+
     }
 
     /**
@@ -93,8 +103,7 @@ public class LauncherActivity extends CommonActivity
 
     @Override
     public void hasPermission(List<String> granted, boolean isAll) {
-        startActivity(HomeActivity.class);
-        finish();
+        //拥有权限后,跳转
     }
 
     @Override
@@ -106,11 +115,14 @@ public class LauncherActivity extends CommonActivity
     @Override
     protected void onRestart() {
         super.onRestart();
-        if (XXPermissions.isHasPermission(LauncherActivity.this, Permission.Group.STORAGE)) {
-            hasPermission(null, true);
-        }else {
-            requestFilePermission();
+        if (getApplicationInfo().targetSdkVersion >= Build.VERSION_CODES.M) {
+            if (XXPermissions.isHasPermission(LauncherActivity.this, Permission.Group.STORAGE)) {
+                hasPermission(null, true);
+            } else {
+                requestFilePermission();
+            }
         }
+
     }
 
     @Override
@@ -124,7 +136,7 @@ public class LauncherActivity extends CommonActivity
         if (quick) {
             ToastUtils.show("没有权限访问文件，请手动授予权限");
             XXPermissions.gotoPermissionSettings(LauncherActivity.this, true);
-        }else {
+        } else {
             ToastUtils.show("请先授予文件读写权限");
             getWindow().getDecorView().postDelayed(new Runnable() {
                 @Override
@@ -140,7 +152,8 @@ public class LauncherActivity extends CommonActivity
      */
 
     @Override
-    public void onAnimationStart(Animation animation) {}
+    public void onAnimationStart(Animation animation) {
+    }
 
     @Override
     public void onAnimationEnd(Animation animation) {
@@ -148,7 +161,8 @@ public class LauncherActivity extends CommonActivity
     }
 
     @Override
-    public void onAnimationRepeat(Animation animation) {}
+    public void onAnimationRepeat(Animation animation) {
+    }
 
 
     @Override

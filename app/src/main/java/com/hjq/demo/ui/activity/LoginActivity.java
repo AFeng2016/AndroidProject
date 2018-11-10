@@ -9,7 +9,7 @@ import com.hjq.demo.R;
 import com.hjq.demo.common.CommonActivity;
 import com.hjq.toast.ToastUtils;
 
-import butterknife.BindView;
+import org.xutils.view.annotation.ViewInject;
 
 /**
  *    author : HJQ
@@ -20,11 +20,11 @@ import butterknife.BindView;
 public class LoginActivity extends CommonActivity
         implements View.OnClickListener {
 
-    @BindView(R.id.et_login_phone)
+    @ViewInject(R.id.et_login_phone)
     EditText mPhoneView;
-    @BindView(R.id.et_login_password)
+    @ViewInject(R.id.et_login_password)
     EditText mPasswordView;
-    @BindView(R.id.btn_login_commit)
+    @ViewInject(R.id.btn_login_commit)
     Button mCommitView;
 
     private EditTextInputHelper mEditTextInputHelper;
