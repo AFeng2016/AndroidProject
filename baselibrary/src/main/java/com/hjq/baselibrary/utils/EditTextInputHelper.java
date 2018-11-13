@@ -58,7 +58,7 @@ public final class EditTextInputHelper implements TextWatcher {
     }
 
     /**
-     * 移除EditText监听，避免内存泄露
+     * onDestroy()中调用此方法移除EditText监听，避免内存泄露
      */
     public void removeViews() {
         if (mViewSet == null) return;

@@ -52,16 +52,15 @@ public class HomeActivity extends CommonActivity implements
 
         // 修复在 ViewPager 中点击 EditText 弹出软键盘导致 BottomNavigationView 还显示在 ViewPager 下面的问题
         postDelayed(this, 1000);
-    }
 
-    @Override
-    protected void initData() {
         mAdapter = new HomeViewPagerAdapter(this);
         mViewPager.setAdapter(mAdapter);
 
         // 限制页面数量
         mViewPager.setOffscreenPageLimit(mAdapter.getCount());
     }
+
+
 
     /**
      * {@link Runnable}

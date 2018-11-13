@@ -16,10 +16,10 @@ import android.view.ViewGroup;
 import java.lang.reflect.Field;
 
 /**
- *    author : HJQ
- *    github : https://github.com/getActivity/AndroidProject
- *    time   : 2018/10/18
- *    desc   : Fragment懒加载基类
+ * author : HJQ
+ * github : https://github.com/getActivity/AndroidProject
+ * time   : 2018/10/18
+ * desc   : Fragment懒加载基类
  */
 public abstract class BaseLazyFragment extends Fragment {
 
@@ -121,7 +121,6 @@ public abstract class BaseLazyFragment extends Fragment {
 
     protected void init() {
         initView();
-        initData();
     }
 
     //引入布局
@@ -133,8 +132,6 @@ public abstract class BaseLazyFragment extends Fragment {
     //初始化控件
     protected abstract void initView();
 
-    //初始化数据
-    protected abstract void initData();
 
     /**
      * 根据资源id获取一个View
@@ -150,7 +147,7 @@ public abstract class BaseLazyFragment extends Fragment {
     /**
      * 跳转到其他Activity
      *
-     * @param cls          目标Activity的Class
+     * @param cls 目标Activity的Class
      */
     public void startActivity(Class<? extends Activity> cls) {
         startActivity(new Intent(getContext(), cls));

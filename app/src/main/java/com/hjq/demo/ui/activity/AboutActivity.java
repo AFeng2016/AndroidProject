@@ -26,8 +26,5 @@ public class AboutActivity extends CommonActivity {
 
     }
 
-    @Override
-    protected void initData() {
 
-    }
 }

@@ -30,8 +30,5 @@ public class CopyFragment extends CommonLazyFragment {
 
     }
 
-    @Override
-    protected void initData() {
 
-    }
 }

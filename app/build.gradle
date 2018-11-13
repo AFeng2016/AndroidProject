@@ -1,7 +1,7 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion rootProject.ext.compileSdkVersion
+    compileSdkVersion 28
     buildToolsVersion rootProject.ext.buildToolsVersion
     defaultConfig {
         applicationId "com.hjq.demo"
@@ -9,8 +9,27 @@ android {
         targetSdkVersion rootProject.ext.targetSdkVersion
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
+
+    signingConfigs {
+        debug {
+            keyAlias 'key0'
+            keyPassword 'test2018'
+            storeFile file('/test2018.jks')
+            storePassword 'test2018'
+        }
+
+        release {
+            keyAlias 'key0'
+            keyPassword 'test2018'
+            storeFile file('/test2018.jks')
+            storePassword 'test2018'
+        }
+
+    }
+
     buildTypes {
         release {
+            signingConfig signingConfigs.release
             // 不显示Log
             buildConfigField "boolean", "LOG_DEBUG", "false"
             // 移除无用的resource文件，前提minifyEnabled必须打开
@@ -24,6 +43,7 @@ android {
         }
 
         debug {
+            signingConfig signingConfigs.debug
             //ZipAlign优化
             zipAlignEnabled false
             //设置混淆
@@ -52,47 +72,65 @@ android {
 dependencies {
     api fileTree(include: ['*.jar'], dir: 'libs')
     api project(':baselibrary')
+
     // 示例：添加一个 aar 包
     //api(name: 'password_dialog', ext: 'aar')
-
     api "com.android.support:appcompat-v7:$rootProject.ext.supportLibraryVersion"
     api "com.android.support:design:$rootProject.ext.supportLibraryVersion"
     api "com.android.support:support-v4:$rootProject.ext.supportLibraryVersion"
     api "com.android.support:cardview-v7:$rootProject.ext.supportLibraryVersion"
     api "com.android.support.constraint:constraint-layout:$rootProject.ext.constraintlayoutVersion"
     api 'com.android.support:recyclerview-v7:28.0.0'
+
     // 解决函数超过65535时的分包问题
     api 'com.android.support:multidex:1.0.3'
 
     // 状态栏沉浸：https://github.com/gyf-dev/ImmersionBar
     api 'com.gyf.barlibrary:barlibrary:2.3.0'
+
     // 侧滑功能：https://github.com/bingoogolapple/BGASwipeBackLayout-Android
     api 'cn.bingoogolapple:bga-swipebacklayout:1.1.9@aar'
 
     // 权限请求框架：https://github.com/getActivity/XXPermissions
     api 'com.hjq:xxpermissions:5.2'
+
     // 标题栏：https://github.com/getActivity/TitleBar
     api 'com.hjq:titlebar:3.2'
+
     // 吐司工具类：https://github.com/getActivity/ToastUtils
     api 'com.hjq:toast:2.5'
 
     // 圆形的ImageView：https://github.com/hdodenhof/CircleImageView
     api 'de.hdodenhof:circleimageview:2.2.0'
+
     //网络请求库
     api 'org.xutils:xutils:3.5.0'
+
     //选项卡
     api 'com.flyco.tablayout:FlycoTabLayout_Lib:2.1.2@aar'
+
     //轮播
     api 'com.youth.banner:banner:1.4.10'
+
     //适配器
     api 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.42'
+
     //JSON处理
     api 'com.google.code.gson:gson:2.8.5'
-    //事件分发
-    api 'org.greenrobot:eventbus:3.1.1'
 
-    // 友盟统计
-    compileOnly 'com.umeng.analytics:analytics:6.1.4'
+
+    // 友盟统计与第三方
+    implementation files('libs/umeng-share-core-6.9.3.jar')
+    implementation files('libs/umeng-sharetool-6.9.3.jar')
+    implementation files('libs/umeng-share-QQ-simplify-6.9.3.jar')
+    implementation files('libs/umeng-share-wechat-simplify-6.9.3.jar')
+    implementation files('libs/umeng-common-1.5.4.jar')
+    implementation files('libs/umeng-analytics-7.5.4.jar')
+    //PushSDK必须依赖utdid库，所以需要加入对应依赖
+    api 'com.umeng.sdk:utdid:1.1.5.3'
+    //PushSDK
+    api 'com.umeng.sdk:push:4.2.0'
+
 }
 
 repositories {

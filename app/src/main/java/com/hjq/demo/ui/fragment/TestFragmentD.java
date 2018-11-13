@@ -52,10 +52,7 @@ public class TestFragmentD extends CommonLazyFragment
         mBrowserView.setOnClickListener(this);
     }
 
-    @Override
-    protected void initData() {
 
-    }
 
     /**
      * {@link View.OnClickListener}

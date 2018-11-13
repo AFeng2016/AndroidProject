@@ -61,10 +61,7 @@ public class TestFragmentC extends CommonLazyFragment
         mSwipeDisableView.setOnClickListener(this);
     }
 
-    @Override
-    protected void initData() {
 
-    }
 
     @Override
     public boolean isStatusBarEnabled() {

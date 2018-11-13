@@ -26,8 +26,5 @@ public class CopyActivity extends CommonActivity {
 
     }
 
-    @Override
-    protected void initData() {
 
-    }
 }

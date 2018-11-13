@@ -58,10 +58,7 @@ public class TestFragmentA extends CommonLazyFragment
         mCollapsingToolbarLayout.setOnScrimsListener(this);
     }
 
-    @Override
-    protected void initData() {
 
-    }
 
     @Override
     public boolean isStatusBarEnabled() {

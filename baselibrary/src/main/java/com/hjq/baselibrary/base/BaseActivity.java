@@ -26,10 +26,10 @@ public abstract class BaseActivity extends AppCompatActivity {
         init();
     }
 
-    public void init() {
+    protected void init() {
         initView();
-        initData();
     }
+
 
     //引入布局
     protected abstract int getLayoutId();
@@ -40,8 +40,6 @@ public abstract class BaseActivity extends AppCompatActivity {
     //初始化控件
     protected abstract void initView();
 
-    //初始化数据
-    protected abstract void initData();
 
     @Override
     public void finish() {

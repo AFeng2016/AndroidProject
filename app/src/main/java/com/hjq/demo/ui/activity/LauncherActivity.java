@@ -24,7 +24,7 @@ import org.xutils.view.annotation.ViewInject;
  * author : HJQ
  * github : https://github.com/getActivity/AndroidProject
  * time   : 2018/10/18
- * desc   : 启动界面
+ * desc   : 启动界面 -- 没有权限则申请，有的话就进入主页面
  */
 public class LauncherActivity extends CommonActivity
         implements OnPermission, Animation.AnimationListener {
@@ -56,15 +56,11 @@ public class LauncherActivity extends CommonActivity
                 .hideBar(BarHide.FLAG_HIDE_STATUS_BAR)//隐藏状态栏
                 .transparentNavigationBar()//透明导航栏，不写默认黑色(设置此方法，fullScreen()方法自动为true)
                 .init();
+
+
     }
 
-    @Override
-    protected void initData() {
-
-        startActivity(HomeActivity.class);
-        finish();
-    }
-
+    //动画持续时间
     private static final int ANIM_TIME = 1000;
 
     /**
@@ -93,6 +89,9 @@ public class LauncherActivity extends CommonActivity
             XXPermissions.with(this)
                     .permission(Permission.Group.STORAGE)
                     .request(this);
+        } else {
+            startActivity(HomeActivity.class);
+            finish();
         }
 
     }
@@ -104,6 +103,8 @@ public class LauncherActivity extends CommonActivity
     @Override
     public void hasPermission(List<String> granted, boolean isAll) {
         //拥有权限后,跳转
+        startActivity(HomeActivity.class);
+        finish();
     }
 
     @Override

@@ -40,10 +40,7 @@ public class TestFragmentB extends CommonLazyFragment
         mCountdownView.setOnClickListener(this);
     }
 
-    @Override
-    protected void initData() {
 
-    }
 
     /**
      * {@link View.OnClickListener}

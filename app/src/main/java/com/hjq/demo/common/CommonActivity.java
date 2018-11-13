@@ -7,8 +7,8 @@ import android.view.View;
 import com.hjq.bar.OnTitleBarListener;
 import com.hjq.bar.TitleBar;
 import com.umeng.analytics.MobclickAgent;
+import com.umeng.message.PushAgent;
 
-import org.greenrobot.eventbus.EventBus;
 import org.xutils.x;
 
 /**
@@ -17,8 +17,7 @@ import org.xutils.x;
  * time   : 2018/10/18
  * desc   : 项目中的Activity基类
  */
-public abstract class CommonActivity extends UIActivity
-        implements OnTitleBarListener {
+public abstract class CommonActivity extends UIActivity implements OnTitleBarListener {
 
     public Activity thisAct;
 
@@ -36,7 +35,7 @@ public abstract class CommonActivity extends UIActivity
         x.view().inject(this);
         thisAct = this;
         MobclickAgent.onEvent(thisAct, getClass().getSimpleName());
-
+        PushAgent.getInstance(thisAct).onAppStart();
         initOrientation();
 
         super.init();
@@ -47,8 +46,12 @@ public abstract class CommonActivity extends UIActivity
      */
     protected void initOrientation() {
         //如果没有指定屏幕方向，则默认为竖屏
-        if (getRequestedOrientation() == ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED) {
-            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        try {
+            if (getRequestedOrientation() == ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED) {
+                setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
@@ -73,8 +76,12 @@ public abstract class CommonActivity extends UIActivity
     }
 
     protected TitleBar getTitleBar() {
-        if (getTitleBarId() > 0 && findViewById(getTitleBarId()) instanceof TitleBar) {
-            return findViewById(getTitleBarId());
+        try {
+            if (getTitleBarId() > 0 && findViewById(getTitleBarId()) instanceof TitleBar) {
+                return findViewById(getTitleBarId());
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
         return null;
     }
@@ -131,46 +138,4 @@ public abstract class CommonActivity extends UIActivity
     }
 
 
-    /**
-     * 是否注册事件分发
-     *
-     * @return true绑定EventBus事件分发，默认不绑定，子类需要绑定的话复写此方法返回true.
-     */
-    protected boolean isRegisterEventBus() {
-        return false;
-    }
-
-//    EventBus 使用示例
-//    EventBus.getDefault().post(event); //发送事件
-//    重写isRegisterEventBus方法并返回true实现注册订阅者
-//    protected boolean isRegisterEventBus() { return true; }
-//    在子类调用接受事件
-//    @Subscribe(threadMode = ThreadMode.MAIN)
-//    public void onEventReceived(MessageEvent<User> event) {
-//        if (event != null && event.getCode() == 0) {
-//            User user = event.getData();
-//        }
-//    }
-
-
-    @Override
-    public void onStart() {
-        super.onStart();
-        if (isRegisterEventBus()) {
-            EventBus.getDefault().register(this);
-        }
-    }
-
-    @Override
-    public void onStop() {
-        super.onStop();
-        if (isRegisterEventBus()) {
-            EventBus.getDefault().unregister(this);
-        }
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-    }
 }

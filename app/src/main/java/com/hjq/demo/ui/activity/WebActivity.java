@@ -75,14 +75,13 @@ public class WebActivity extends CommonActivity {
         } else {
             settings.setLoadsImagesAutomatically(false);
         }
-    }
 
-    @Override
-    protected void initData() {
         mWebView.setWebViewClient(new MyWebViewClient());
         mWebView.setWebChromeClient(new MyWebChromeClient());
         mWebView.loadUrl("https://github.com/getActivity/AndroidProject");
     }
+
+
 
     @Override
     public void onLeftClick(View v) {

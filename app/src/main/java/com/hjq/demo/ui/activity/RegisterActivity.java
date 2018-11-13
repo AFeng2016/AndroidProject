@@ -58,10 +58,6 @@ public class RegisterActivity extends CommonActivity
         mEditTextInputHelper.addViews(mPhoneView, mCodeView, mPasswordView1, mPasswordView2);
     }
 
-    @Override
-    protected void initData() {
-
-    }
 
     /**
      * {@link View.OnClickListener}
