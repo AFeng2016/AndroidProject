@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.hjq.demo.Constant;
 import com.hjq.demo.R;
 import com.hjq.demo.Service.DownloadService;
 import com.hjq.demo.bean.Appversion;
@@ -77,8 +78,8 @@ public class UpdateActivity extends CommonActivity {
         thisAct.startService(downloadIntent);
         // 设置广播接收器，当新版本的apk下载完成后自动弹出安装界面
         IntentFilter intentFilter = new IntentFilter();
-        intentFilter.addAction("com.lajianghongbao");
-        intentFilter.addAction("down_error");
+        intentFilter.addAction(Constant.ActionType.ON_DOWNLOAD.name());
+        intentFilter.addAction(Constant.ActionType.DOWNLOAD_ERROR.name());
         receiver = new BroadcastReceiver() {
 
             public void onReceive(Context context, Intent intent) {
@@ -88,7 +89,7 @@ public class UpdateActivity extends CommonActivity {
                     return;
                 }
 
-                if (action.equals("com.lajianghongbao")) {
+                if (action.equals(Constant.ActionType.ON_DOWNLOAD.name())) {
                     int progress = intent.getIntExtra("progress", 0);
                     if (progress > 0) {
                         pb.setVisibility(View.VISIBLE);
@@ -111,7 +112,7 @@ public class UpdateActivity extends CommonActivity {
                         btn_update.setText("立即下载");
                         pb.setVisibility(View.GONE);
                     }
-                } else if (action.equals("down_error")) {
+                } else if (action.equals(Constant.ActionType.DOWNLOAD_ERROR.name())) {
                     //下载错误
                     btn_update.setVisibility(View.VISIBLE);
                     btn_update.setText("立即更新");

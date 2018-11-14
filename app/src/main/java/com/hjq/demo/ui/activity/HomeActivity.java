@@ -61,7 +61,6 @@ public class HomeActivity extends CommonActivity implements
     }
 
 
-
     /**
      * {@link Runnable}
      */

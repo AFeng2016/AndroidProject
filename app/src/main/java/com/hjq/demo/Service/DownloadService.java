@@ -54,7 +54,7 @@ public class DownloadService extends IntentService {
             handler.postDelayed(run, 500);
 
             // 广播出去，用于显示下载进度
-            Intent sendIntent = new Intent(Constant.ON_DOWNLOAD);
+            Intent sendIntent = new Intent(Constant.ActionType.ON_DOWNLOAD.name());
             sendIntent.putExtra("progress", downloadLength * 100 / fileLength);
             sendBroadcast(sendIntent);
 
@@ -64,7 +64,7 @@ public class DownloadService extends IntentService {
     };
 
     public DownloadService() {
-        super(Constant.ON_DOWNLOAD);
+        super(Constant.ActionType.ON_DOWNLOAD.name());
     }
 
     protected void onHandleIntent(Intent intent) {
@@ -120,7 +120,7 @@ public class DownloadService extends IntentService {
                             // 移除通知栏
                             notificationManager.cancel(0);
                             // 广播出去，由广播接收器来处理下载完成的文件
-                            Intent sendIntent = new Intent(Constant.ON_DOWNLOAD);
+                            Intent sendIntent = new Intent(Constant.ActionType.ON_DOWNLOAD.name());
                             // 把下载好的文件的保存地址加进Intent
                             sendIntent.putExtra("downloadFile", file.getPath());
                             sendBroadcast(sendIntent);
@@ -174,7 +174,7 @@ public class DownloadService extends IntentService {
                                     // 移除通知栏
                                     notificationManager.cancel(0);
                                     // 广播出去，由广播接收器来处理下载完成的文件
-                                    Intent sendIntent = new Intent(Constant.ON_DOWNLOAD);
+                                    Intent sendIntent = new Intent(Constant.ActionType.ON_DOWNLOAD.name());
                                     // 把下载好的文件的保存地址加进Intent
                                     sendIntent.putExtra("downloadFile", result.getPath());
                                     sendBroadcast(sendIntent);
@@ -197,7 +197,7 @@ public class DownloadService extends IntentService {
                                     // 移除通知栏
                                     notificationManager.cancel(0);
                                     // 广播出去，由广播接收器来处理状态
-                                    Intent sendIntent = new Intent("down_error");
+                                    Intent sendIntent = new Intent(Constant.ActionType.DOWNLOAD_ERROR.name());
                                     sendBroadcast(sendIntent);
 
                                 }
@@ -233,7 +233,7 @@ public class DownloadService extends IntentService {
             // 移除通知栏
             notificationManager.cancel(0);
             // 广播出去，由广播接收器来处理下载完成的文件
-            Intent sendIntent = new Intent(Constant.ON_DOWNLOAD);
+            Intent sendIntent = new Intent(Constant.ActionType.ON_DOWNLOAD.name());
             // 把下载好的文件的保存地址加进Intent
             sendIntent.putExtra("downloadFile", file.getPath());
             sendBroadcast(sendIntent);
