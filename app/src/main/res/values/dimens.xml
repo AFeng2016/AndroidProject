@@ -7,4 +7,9 @@
     <!-- 默认分割线的宽度或者高度 -->
     <dimen name="line_size">1px</dimen>
 
+    <!--Matisse  本地文件选择器item尺寸控制-->
+    <dimen name="grid_expected_size">120dp</dimen>
+    <dimen name="item_margin_horizontal">24dp</dimen>
+    <dimen name="item_margin_vertical">8dp</dimen>
+
 </resources>

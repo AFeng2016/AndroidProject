@@ -34,4 +34,10 @@
     <string name="about_text">关于我们</string>
     <string name="about_copyright">Copyright © 2018</string>
 
+
+
+    <string name="error_gif">文件分辨率至少为 %1$dpx 或文件大小不能超过 %2$sM</string>
+
+
+
 </resources>

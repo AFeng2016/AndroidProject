@@ -118,6 +118,15 @@ dependencies {
     //JSON处理
     api 'com.google.code.gson:gson:2.8.5'
 
+    //https://github.com/zhihu/Matisse  本地文件选择器
+    implementation 'com.zhihu.android:matisse:0.5.2-beta3'
+    //图片加载器  matisse 需要2.5.2 ，不要变动版本
+    implementation 'com.squareup.picasso:picasso:2.5.2'
+
+    //七牛图片上传SDK
+    implementation 'com.qiniu:qiniu-android-sdk:7.3.13'
+
+
 
     // 友盟统计与第三方
     implementation files('libs/umeng-share-core-6.9.3.jar')

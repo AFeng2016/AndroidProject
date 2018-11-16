@@ -10,6 +10,7 @@ import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -35,6 +36,8 @@ public class UpdateActivity extends CommonActivity {
     TextView tv_desc;
     @ViewInject(R.id.pb)
     ProgressBar pb;
+    @ViewInject(R.id.iv_cancel)
+    ImageView iv_cancel;
 
     BroadcastReceiver receiver;
     Appversion version;
@@ -55,6 +58,7 @@ public class UpdateActivity extends CommonActivity {
         tv_desc.setText(version.getUpDes().replace("|", "\r\n"));
         if (version.getMustup().equals("1")) {
             //强行更新
+            iv_cancel.setVisibility(View.INVISIBLE);
         }
     }
 

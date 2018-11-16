@@ -15,9 +15,9 @@ import android.util.Log;
 import android.widget.RemoteViews;
 import android.widget.Toast;
 
+import com.hjq.baselibrary.utils.FileUtils;
 import com.hjq.demo.Constant;
 import com.hjq.demo.R;
-import com.hjq.demo.tool.CommonMethod;
 import com.hjq.demo.ui.activity.HomeActivity;
 
 import org.xutils.common.Callback;
@@ -110,7 +110,7 @@ public class DownloadService extends IntentService {
         try {
             File apk = new File(file.getPath());
             if (apk.exists()) {
-                String md5 = CommonMethod.getFileMD5(apk);
+                String md5 = FileUtils.getFileMD5(apk);
                 Log.d("--md5", "onReceive: " + md5);
                 if (!TextUtils.isEmpty(md5)) {
                     if (!TextUtils.isEmpty(apkmd5)) {

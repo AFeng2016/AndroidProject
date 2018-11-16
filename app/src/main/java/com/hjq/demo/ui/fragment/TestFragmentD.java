@@ -8,8 +8,10 @@ import com.hjq.demo.common.CommonLazyFragment;
 import com.hjq.demo.ui.activity.AboutActivity;
 import com.hjq.demo.ui.activity.LoginActivity;
 import com.hjq.demo.ui.activity.RegisterActivity;
+import com.hjq.demo.ui.activity.RicheditorActivity;
 import com.hjq.demo.ui.activity.WebActivity;
 
+import org.xutils.view.annotation.Event;
 import org.xutils.view.annotation.ViewInject;
 
 /**
@@ -52,6 +54,10 @@ public class TestFragmentD extends CommonLazyFragment
         mBrowserView.setOnClickListener(this);
     }
 
+    @Event(R.id.btn_test_richeditor)
+    private void on_btn_test_richeditor(View v){
+        startActivity(RicheditorActivity.class);
+    }
 
 
     /**

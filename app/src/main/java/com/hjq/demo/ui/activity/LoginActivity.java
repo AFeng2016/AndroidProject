@@ -8,12 +8,12 @@ import android.widget.LinearLayout;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import com.hjq.baselibrary.utils.SettingConfig;
 import com.hjq.demo.Constant;
 import com.hjq.demo.R;
 import com.hjq.demo.bean.User;
 import com.hjq.demo.common.CommonActivity;
 import com.hjq.demo.tool.CommonMethod;
+import com.hjq.demo.tool.SystemInfoUtils;
 import com.hjq.demo.widget.LoadingDialog;
 import com.hjq.toast.ToastUtils;
 import com.umeng.analytics.MobclickAgent;
@@ -102,7 +102,7 @@ public class LoginActivity extends CommonActivity {
             RequestParams params = new RequestParams(Constant.DOMAIN + "user/appLogin");
             params.addBodyParameter("user.openId", map.get("openid"));
             params.addBodyParameter("user.unionid", map.get("uid"));
-            params.addBodyParameter("user.imei", CommonMethod.getImei(thisAct));
+            params.addBodyParameter("user.imei", SystemInfoUtils.getImei(thisAct));
             params.addBodyParameter("user.niName", map.get("screen_name"));
             String gender = map.get("gender");
             if (gender != null && gender.equals("男")) gender = "1";
