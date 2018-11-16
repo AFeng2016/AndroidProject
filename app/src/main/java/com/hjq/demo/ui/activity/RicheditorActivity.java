@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.hjq.baselibrary.listener.OnStringCallBack;
 import com.hjq.demo.R;
+import com.hjq.demo.api.HttpUtils;
 import com.hjq.demo.common.CommonActivity;
 import com.hjq.demo.tool.CommonMethod;
 import com.hjq.demo.tool.GifSizeFilter;
@@ -22,6 +23,10 @@ import com.zhihu.matisse.filter.Filter;
 import com.zhihu.matisse.internal.entity.CaptureStrategy;
 import com.zhihu.matisse.listener.OnCheckedListener;
 import com.zhihu.matisse.listener.OnSelectedListener;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+import org.xutils.http.RequestParams;
 
 import java.util.List;
 
@@ -306,22 +311,46 @@ public class RicheditorActivity extends CommonActivity {
 
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+    protected void onActivityResult(int requestCode, int resultCode, final Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 1001 && resultCode == RESULT_OK) {
             Log.e("OnActivityResult ", String.valueOf(Matisse.obtainOriginalState(data))); //是否原文件
             Log.e("OnActivityResult ", String.valueOf(Matisse.obtainResult(data))); //URI
             Log.e("OnActivityResult ", String.valueOf(Matisse.obtainPathResult(data))); //path
 
-            String token = "";
-            CommonMethod.uploadFile(token, String.valueOf(Matisse.obtainPathResult(data)), new OnStringCallBack() {
+            RequestParams params = new RequestParams("http://127.0.0.1:8080/renren-fast/app/getToken");
+//            params.addBodyParameter("time", String.valueOf(System.currentTimeMillis()));
+            HttpUtils.get(params, new HttpUtils.XCallBack() {
                 @Override
-                public void onCallBack(String s) {
-                    //TODO 先上传再插入
-                    mEditor.insertImage("http://www.1honeywan.com/dachshund/image/7.21/7.21_3_thumb.JPG",
-                            "dachshund");
+                public void onSuccess(String result) {
+                    try {
+                        Log.d("--result", "onSuccess: "+result);
+                        JSONObject json = new JSONObject(result);
+                        String token = json.optString("token");
+                        CommonMethod.uploadFile(token, String.valueOf(Matisse.obtainPathResult(data)), new OnStringCallBack() {
+                            @Override
+                            public void onCallBack(String s) {
+                                //TODO 先上传再插入
+                                mEditor.insertImage("http://www.1honeywan.com/dachshund/image/7.21/7.21_3_thumb.JPG",
+                                        "dachshund");
+                            }
+                        });
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+                @Override
+                public void onError() {
+
+                }
+
+                @Override
+                public void onFinished() {
+
                 }
             });
+
 
         }
     }
