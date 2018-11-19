@@ -311,28 +311,32 @@ public class RicheditorActivity extends CommonActivity {
 
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, final Intent data) {
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 1001 && resultCode == RESULT_OK) {
             Log.e("OnActivityResult ", String.valueOf(Matisse.obtainOriginalState(data))); //是否原文件
             Log.e("OnActivityResult ", String.valueOf(Matisse.obtainResult(data))); //URI
             Log.e("OnActivityResult ", String.valueOf(Matisse.obtainPathResult(data))); //path
 
-            RequestParams params = new RequestParams("http://127.0.0.1:8080/renren-fast/app/getToken");
+            final String imgPath = String.valueOf(Matisse.obtainPathResult(data)).replace("[", "").replace("]", "");
+
+            RequestParams params = new RequestParams("http://192.168.2.149:8080/renren-fast/app/getToken");
 //            params.addBodyParameter("time", String.valueOf(System.currentTimeMillis()));
             HttpUtils.get(params, new HttpUtils.XCallBack() {
                 @Override
                 public void onSuccess(String result) {
                     try {
-                        Log.d("--result", "onSuccess: "+result);
+                        Log.d("--result", "onSuccess: " + result);
                         JSONObject json = new JSONObject(result);
                         String token = json.optString("token");
-                        CommonMethod.uploadFile(token, String.valueOf(Matisse.obtainPathResult(data)), new OnStringCallBack() {
+                        final String domain = json.optString("domain");
+                        CommonMethod.uploadFile(token, imgPath, new OnStringCallBack() {
                             @Override
                             public void onCallBack(String s) {
+                                String imgUrl = domain + "/" + s;
+                                Log.d("--result", "imgUrl: " + imgUrl);
                                 //TODO 先上传再插入
-                                mEditor.insertImage("http://www.1honeywan.com/dachshund/image/7.21/7.21_3_thumb.JPG",
-                                        "dachshund");
+                                mEditor.insertImage(imgUrl, "dachshund");
                             }
                         });
                     } catch (JSONException e) {
